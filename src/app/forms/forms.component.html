@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  <div class="jumbotron text-center">
+    <h2>Forms</h2>
+  </div>
+
+  <div class="container" style="text-align:center">
+    <!--
+    <h1>Welcome to Template Driven Forms in Angular</h1>
+   
+    <form #EmployeeDetailsForm="ngForm" (ngSubmit)="displayOnConsole(EmployeeDetailsForm.value)">
+      <label>Emp No.</label>
+      <input type="text" name="empno" ngModel> <br>
+
+      <label>Name</label>
+      <input #nameRef="ngModel" required type="text" name="empname" ngModel><br>
+      <div [hidden]="nameRef.valid||nameRef.pristine" style="color:red">Please enter your name</div>
+
+      <label>Age</label><input type="text" name="age" ngModel><br>
+
+      <div ngModelGroup="AddressDetails">
+        <h4><u>Address Details</u></h4><br>
+        <label>House</label><input type="text" name="houseno" ngModel><br>
+        <label>Building</label><input type="text" name="buildingname" ngModel><br>
+        <label>Street</label><input type="text" name="street" ngModel><br>
+        <label>City</label><input type="text" name="city" ngModel><br>
+        <label>Pin Code</label><input type="text" name="pincode" ngModel><br>
+        <label>Country</label><input type="text" name="country" ngModel><br>
+        <input type="submit"><br>
+      </div>
+    </form>
+    -->
+
+    <!--rEACTIVE FORM: submits data as when its typed and dont wait for submit event -->
+    <h1>Welcome to Module Driven Forms in Angular</h1>
+    <form [formGroup]="employeeDetails" (ngSubmit)="displayOnConsole()">
+      <label>Emp No.</label><input type="text" name="empno" formControlName="empno"> <br>
+      <label>Name</label><input type="text" name="empname" formControlName="empname"><br>
+      <div *ngIf="employeeDetails.controls['empname'].hasError('required')" style="color:red">Please Enter Name</div>
+      <label>Age</label><input type="text" name="age" formControlName="age"><br>
+
+      <div formGroupName="AddressDetails">
+        <b><u>Address Details</u></b><br>
+        <label>House</label><input type="text" name="houseno" formControlName="houseno"><br>
+        <label>Building</label><input type="text" name="buildingname" formControlName="building"><br>
+        <label>Street</label><input type="text" name="street" formControlName="street"><br>
+        <div *ngIf="employeeDetails.controls['AddressDetails'].controls['street'].hasError('required')" style="color:red">Street
+          cant be blank</div>
+        <div *ngIf="employeeDetails.controls['AddressDetails'].controls['street'].hasError('minlength')" style="color:red">Minimum
+          Length is 3</div>
+        <div *ngIf="employeeDetails.controls['AddressDetails'].controls['street'].hasError('maxlength')" style="color:red">Maximim
+          Length is 7</div>
+        <label>City</label><input type="text" name="city" formControlName="city"><br>
+        <label>Pin Code</label><input type="text" name="pincode" formControlName="pincode"><br>
+        <label>Country</label><input type="text" name="country" formControlName="country"><br>
+        <input type="submit"><br>
+      </div>
+    </form>
+
+  </div>
+
+</body>
+
+</html>

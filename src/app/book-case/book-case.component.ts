@@ -10,10 +10,10 @@ export class BookCaseComponent implements OnInit {
   images = ['assets/AngularNinja.png', 'assets/NodejsBook.png', 'assets/ExpressJs.png'];
 
   bookimg: String = this.images[0];
-  counter = 1;
+  counter = 0;
 
   nextImage() {
-    if (this.counter > 3) {
+    if (this.counter > 2) {
       this.counter = 0;
     }
 
